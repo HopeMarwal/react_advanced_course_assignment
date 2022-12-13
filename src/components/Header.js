@@ -1,4 +1,6 @@
+//react
 import React, { useEffect, useState } from "react";
+//icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -7,6 +9,7 @@ import {
   faMedium,
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
+//chakra 
 import { Box, HStack } from "@chakra-ui/react";
 
 const socials = [
