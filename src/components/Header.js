@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -33,6 +33,30 @@ const socials = [
 ];
 
 const Header = () => {
+  const [translate, setTranslate] = useState("0")
+  const [lastScroll, setLastScroll] = useState(0)
+  
+  useEffect(() => {
+    const handleScroll = () => {      
+      let newScroll = window.pageYOffset
+
+      console.log(`newScroll: ${newScroll}, lastScroll: ${lastScroll}`)
+
+      if(newScroll > lastScroll) {
+        setTranslate('-250px')
+      } else {
+        setTranslate('0')
+      }
+      setLastScroll(newScroll)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+
+  })
 
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
@@ -48,14 +72,14 @@ const Header = () => {
   return (
     <Box
       position="fixed"
-      top={0}
+      top={translate}
       left={0}
       right={0}
       translateY={0}
-      transitionProperty="transform"
+      transitionProperty="top"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
-      backgroundColor="#18181b"
+      backgroundColor="#18181b" 
     >
       <Box color="white" maxWidth="1280px" margin="0 auto">
         <HStack
